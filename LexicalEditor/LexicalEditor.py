@@ -11,12 +11,10 @@ class LexicalEditor():
 
     #Removes all punctuation for word
     def erase_punctuation(self, word):
-        s = list(word)
-        for char in range(len(word)):
-            for x in range(len(self.punctuation)):
-                if self.punctuation[x][0] == word[char]:
-                    s[char] = self.punctuation[x][1]
-        return "".join(s)
+        for p in self.punctuation:
+            word = word.replace(p[0], p[1])
+
+        return word
 
 
     #Returns true if the word is a adjective, noun, etc.
