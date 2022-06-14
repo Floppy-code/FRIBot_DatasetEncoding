@@ -17,14 +17,8 @@ class Vectorizer():
         file = open(filepath, 'rb')                         #Loading pickle dictionary
         self.word_dictionary = pickle.load(file)
 
-        print("Dict:")
         for key, value in self.word_dictionary.items():     #Building inverse dictionary
-            print("Key: {} Val: {}".format(key, value))
             self.inverse_dictionary[value] = key
-
-        print("Inverse:")
-        for key, value in self.inverse_dictionary.items():
-            print("Key: {} Val: {}".format(key, value))
 
 
     #Removes all punctuation and turns all words into base form.
