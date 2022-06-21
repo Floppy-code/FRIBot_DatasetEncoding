@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Project",
+            "name": "Python: Run Encoder",
             "type": "python",
             "request": "launch",
-            "program": "${file}",
+            "program": "${workspaceFolder}/DatasetEncoding.py",
             "console": "integratedTerminal",
             "justMyCode": true
         }

@@ -1,6 +1,5 @@
 from ntpath import join
 import pickle
-import os
 import numpy as np
 
 from Encoding.EncoderBase import Encoder
@@ -14,6 +13,7 @@ class EncoderClassifier(Encoder):
         self.word_dictionary = {}
         self.lex_editor = LexicalEditor()
         self.dataset = None
+
 
     def encode_feature_set(self, input_file, output_file):
         #Loading dataset questions and appending IDs
@@ -78,6 +78,7 @@ class EncoderClassifier(Encoder):
 
         return arr
 
+
     def load_dataset(self, filename):
         f = open(filename, encoding="utf8", mode = 'r')
 
@@ -88,6 +89,7 @@ class EncoderClassifier(Encoder):
         return lines[1:]
 
 
+    #Format: [(question, question_intent_id)]
     def save_dataset(self, filename):
         file = open(filename, 'wb')
         pickle.dump(self.dataset, file)
