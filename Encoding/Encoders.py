@@ -22,7 +22,7 @@ class EncoderClassifier(Encoder):
         print("...Done")
     
         #metadata = [x[0:4] for x in lines]
-        questions = [x[5:9] for x in lines]
+        questions = [x[5:10] for x in lines]
         #answers = [x[10:12] for x in lines]
         
         print("[INFO] Assigning unique IDs to questions", end = '')
@@ -52,7 +52,7 @@ class EncoderClassifier(Encoder):
                     self.dictionary_counter += 1
 
         print("...Done")
-
+        
         #Conversion to array of word vectors
         print("[INFO] Sentence vectorization", end = '')
         #Feature set format: [np vector of words, id]
