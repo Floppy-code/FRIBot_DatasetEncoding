@@ -1,11 +1,13 @@
-from Encoding.Encoders import EncoderClassifier
+from Encoding.Encoders import EncoderClassifier, EncoderLSTM
 from Vectorization.Vectorizer import Vectorizer
 
 #Encoding - Encoding the whole dataset into one-hot vectors and output vectors
 
-encoder = EncoderClassifier()
-encoder.encode_feature_set('./data/komplet2.csv', './encoded/komplet2_encoded')
+# encoder = EncoderClassifier()
+# encoder.encode_feature_set('./data/komplet2.csv', './encoded/komplet2_encoded')
 
+encoder = EncoderLSTM()
+encoder.encode_feature_set('./data/komplet_dataset.csv', './encoded/komplet_dataset')
 
 # Vectorization - Turning any sentence into one-hot encoded vector
 
