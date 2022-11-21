@@ -153,6 +153,10 @@ class EncoderLSTM(Encoder):
         #Dictionaries of unique ids for each characters
         input_token_index = dict([(char, i) for i, char in enumerate(input_characters)])
         target_token_index = dict([(char, i) for i, char in enumerate(target_characters)])
+        
+        #Reverse dictionaries so data can be transformed back into text
+        reverse_input_char_index = dict((i, char) for char, i in input_token_index.items())
+        reverse_target_char_index = dict((i, char) for char, i in target_token_index.items())
 
         #Feature and label set data
         encoder_input_data = np.zeros((len(input_texts), max_encoder_seq_length, num_encoder_tokens), dtype="float32")
@@ -175,7 +179,25 @@ class EncoderLSTM(Encoder):
 
         self.dataset = (encoder_input_data, decoder_input_data, decoder_target_data)
         print(f'[INFO] Saving dataset to {output_file}', end = '')
-        self.save_dataset(output_file)
+        self.save_to_file(output_file, self.dataset)
+        print('...DONE')
+
+        var_file = output_file + "_vars"
+        print(f'[INFO] Saving dataset variables to {var_file}', end = '')        
+        vars = (input_characters,
+                target_characters,
+                num_encoder_tokens,
+                num_decoder_tokens,
+                max_encoder_seq_length,
+                max_decoder_seq_length)
+        self.save_to_file(var_file, vars)
+        print('...DONE')
+
+        reverse_dict_file = output_file + "_reverse_dict"
+        print(f'[INFO] Saving reverse dictionaries to {reverse_dict_file}', end = '')        
+        reverse_dicts = (reverse_input_char_index,
+                        reverse_target_char_index)
+        self.save_to_file(reverse_dict_file, reverse_dicts)
         print('...DONE')
 
 
@@ -189,6 +211,6 @@ class EncoderLSTM(Encoder):
         return lines[1:]
 
 
-    def save_dataset(self, filename):
+    def save_to_file(self, filename, object):
         with open(filename, 'wb') as file:
-            pickle.dump(self.dataset, file)
+            pickle.dump(object, file)
